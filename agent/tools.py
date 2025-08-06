@@ -1,5 +1,5 @@
 from langchain.tools import Tool
-from agent.core.workflows import tool
+from agent.core.tool_registry import tool
 import requests
 
 # 증권사 리포트 조회 Tool
