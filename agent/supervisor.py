@@ -18,7 +18,19 @@ class StockState(BaseModel):
     next_action: str = ""
 
 def supervisor_node(state: StockState) -> StockState:
-    """The supervisor node that decides the next action."""
+    """
+    분석 워크플로우의 다음 단계를 결정하는 슈퍼바이저 노드 함수입니다.
+
+    이 함수는 LLM을 사용하여 현재까지 수집된 정보(`info_log`)를 바탕으로
+    다음에 호출할 워커(Worker) 에이전트('fetch_news', 'fetch_report', 'fetch_price')를 결정하거나,
+    분석을 종료('end')할지를 결정합니다.
+
+    Args:
+        state (StockState): 현재 상태. 'stock_code'와 'info_log'를 포함합니다.
+
+    Returns:
+        StockState: 'next_action' 필드가 LLM의 결정으로 업데이트된 상태.
+    """
     context = "\n".join(state.info_log)
     prompt = f"""
         당신은 주식 분석을 총괄하는 슈퍼바이저입니다.

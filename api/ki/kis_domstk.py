@@ -25,6 +25,25 @@ from pandas import DataFrame
 # Input: None (Option) 상세 Input값 변경이 필요한 경우 API문서 참조
 # Output: DataFrame (Option) output API 문서 참조 등
 def get_order_cash(ord_dv="", itm_no="", qty=0, unpr=0, tr_cont="", FK100="", NK100="", dataframe=None):  # 국내주식주문 > 주식주문(현금)
+    """
+    국내 주식 현금 주문을 실행합니다. (매수/매도)
+
+    KIS API의 '주식주문(현금)' 기능을 호출하여 지정가 매수 또는 매도 주문을 전송합니다.
+    성공 시 주문 결과를 DataFrame으로 반환합니다.
+
+    Args:
+        ord_dv (str): 주문 구분 ('buy': 매수, 'sell': 매도).
+        itm_no (str): 주문할 종목의 코드 (6자리).
+        qty (int): 주문 수량.
+        unpr (int): 주문 단가.
+        tr_cont (str, optional): 연속 거래 식별자. Defaults to "".
+        FK100 (str, optional): 연속 거래 키 (Foreign Key). Defaults to "".
+        NK100 (str, optional): 연속 거래 다음 키 (Next Key). Defaults to "".
+        dataframe (pd.DataFrame, optional): 기존 데이터프레임. Defaults to None.
+
+    Returns:
+        pd.DataFrame or None: 주문 성공 시, API 응답 결과(output)를 담은 DataFrame. 실패 시 None.
+    """
     url = '/uapi/domestic-stock/v1/trading/order-cash'
 
     if ord_dv == "buy":
@@ -899,6 +918,23 @@ def get_inquire_period_profit_lst(inqr_strt_dt=None, inqr_end_dt=None, tr_cont="
 # Input: None (Option) 상세 Input값 변경이 필요한 경우 API문서 참조
 # Output: DataFrame (Option) output
 def get_inquire_price(div_code="J", itm_no="", tr_cont="", FK100="", NK100="", dataframe=None):  # [국내주식] 기본시세 > 주식현재가 시세
+    """
+    주식 현재가 시세를 조회합니다.
+
+    KIS API의 '주식현재가 시세' 기능을 호출하여 특정 종목의 현재가 정보를 조회합니다.
+    결과는 DataFrame 형태로 반환됩니다.
+
+    Args:
+        div_code (str, optional): 시장 분류 코드 ('J': 주식/ETF/ETN, 'W': ELW). Defaults to "J".
+        itm_no (str): 조회할 종목의 코드 (6자리).
+        tr_cont (str, optional): 연속 거래 식별자. Defaults to "".
+        FK100 (str, optional): 연속 거래 키 (Foreign Key). Defaults to "".
+        NK100 (str, optional): 연속 거래 다음 키 (Next Key). Defaults to "".
+        dataframe (pd.DataFrame, optional): 기존 데이터프레임. Defaults to None.
+
+    Returns:
+        pd.DataFrame: 조회된 시세 정보를 담은 DataFrame.
+    """
     url = '/uapi/domestic-stock/v1/quotations/inquire-price'
     tr_id = "FHKST01010100" # 주식현재가 시세
 
