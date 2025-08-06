@@ -14,11 +14,13 @@ def main(stock_code: str):
     report = run_research(stock_code)
 
     # 2. Run the trader agent
-    decision = run_trader(report)
+    decision_result = run_trader(report, stock_code)
 
     # 3. Print the final result
     print("\n" + "="*50)
-    print(f"Master Workflow Complete. Final Decision for {stock_code}: {decision.upper()}")
+    print(f"Master Workflow Complete for {stock_code}")
+    print(f"Final Decision: {decision_result.get('decision', 'N/A').upper()}")
+    print(f"Trade Result: {decision_result.get('trade_result', 'N/A')}")
     print("="*50)
 
 if __name__ == "__main__":
