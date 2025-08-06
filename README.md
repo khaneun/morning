@@ -97,3 +97,13 @@ python app.py
 	•	assets.py를 활용한 프롬프트 최적화
 	•	멀티 에이전트 오케스트레이션 기능 추가
 	•	백테스팅 및 성능 추적 기능 통합
+
+### 5. Running Tests
+이 프로젝트는 `unittest` 프레임워크를 사용하여 테스트를 관리합니다. `testcase` 디렉토리에서 모든 테스트를 실행할 수 있습니다.
+
+To run all tests, execute the following command from the root directory:
+```bash
+python -m unittest discover testcase
+```
+
+This will automatically discover and run all tests within the `testcase` directory.
